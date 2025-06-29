@@ -5,8 +5,8 @@ let quotes = [
   { text: "Injustice anywhere is a threat to justice everywhere.", category: "Justice" }
 ];
 
-// Step 2: Show a random quote
-function showRandomQuote() {
+// Step 2: Display a random quote
+function displayRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[randomIndex];
 
@@ -14,7 +14,9 @@ function showRandomQuote() {
   quoteDisplay.textContent = `"${quote.text}" - ${quote.category}`;
 }
 
-document.getElementById("newQuote").addEventListener("click", showRandomQuote);
+// Attach event listener to "Show New Quote" button
+document.getElementById("newQuote").addEventListener("click", displayRandomQuote);
+
 // Step 3: Add new quote
 function addQuote() {
   const textInput = document.getElementById("newQuoteText");
@@ -37,5 +39,5 @@ function addQuote() {
   alert("New quote added!");
 }
 
-// Attach event listener to Add Quote button
+// Attach event listener to "Add Quote" button
 document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
