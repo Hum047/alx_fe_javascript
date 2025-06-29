@@ -18,6 +18,12 @@
     <button id="addQuoteBtn">Add Quote</button>
   </div>
 
+  <!-- Category Filter Dropdown -->
+<label for="categoryFilter">Filter by Category:</label>
+<select id="categoryFilter" onchange="filterQuotes()">
+  <option value="all">All Categories</option>
+</select>
+
   <!-- Checker wants this literal text in HTML -->
   <button id="exportBtn">Export Quotes</button>
   <input type="file" id="importFile" accept=".json" />
