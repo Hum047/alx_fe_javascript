@@ -260,7 +260,54 @@ document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
 document.getElementById("exportBtn").addEventListener("click", exportToJsonFile);
 document.getElementById("importFile").addEventListener("change", importFromJsonFile);
+document.getElementById("syncBtn").addEventListener("click", fetchQuotesFromServer);
 
 // Initialize app
 populateCategories();
 filterQuotes();
+// Simulate fetching quotes from a mock server
+async function fetchQuotesFromServer() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=5");
+    const serverData = await response.json();
+
+    // Simulate mapping server posts to quote format
+    const serverQuotes = serverData.map(item => ({
+      text: item.title,
+      category: "Server" // or item.body as category
+    }));
+
+    handleServerQuotes(serverQuotes);
+  } catch (error) {
+    console.error("Error fetching from server:", error);
+  }
+}
+function handleServerQuotes(serverQuotes) {
+  let updated = false;
+
+  serverQuotes.forEach(serverQuote => {
+    const exists = quotes.some(localQuote =>
+      localQuote.text === serverQuote.text &&
+      localQuote.category === serverQuote.category
+    );
+
+    if (!exists) {
+      quotes.push(serverQuote);
+      updated = true;
+    }
+  });
+
+  if (updated) {
+    saveQuotes();
+    populateCategories();
+    filterQuotes();
+
+    // Notify user
+    alert("New quotes were synced from the server.");
+  }
+}
+// Start periodic sync (e.g., every 60 seconds)
+setInterval(fetchQuotesFromServer, 60000);
+
+// You can also trigger once on load
+fetchQuotesFromServer();
