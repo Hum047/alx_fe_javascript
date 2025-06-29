@@ -23,7 +23,7 @@ function showRandomQuote() {
 }
 
 // Step 3: Add new quote
-function addQuote() {
+ffunction addQuote() {
   const textInput = document.getElementById("newQuoteText");
   const categoryInput = document.getElementById("newQuoteCategory");
 
@@ -35,14 +35,23 @@ function addQuote() {
     return;
   }
 
-  quotes.push({ text: newText, category: newCategory });
+  const newQuote = { text: newText, category: newCategory };
+
+  quotes.push(newQuote);
   saveQuotes();
+
+  populateCategories(); // update dropdown if new category
+  filterQuotes(); // refresh filtered display
+
+  // 🔁 Send to mock server
+  sendQuoteToServer(newQuote);
 
   textInput.value = "";
   categoryInput.value = "";
 
   alert("New quote added!");
 }
+
 
 // Step 4: Create the quote form dynamically
 function createAddQuoteForm() {
