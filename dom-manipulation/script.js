@@ -117,3 +117,8 @@ function importFromJsonFile(event) {
 // Attach event listener
 document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 createAddQuoteForm();
+// Attach event listeners
+document.getElementById("newQuote").addEventListener("click", showRandomQuote);
+document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+document.getElementById("exportBtn").addEventListener("click", exportToJsonFile);
+document.getElementById("importFile").addEventListener("change", importFromJsonFile);
